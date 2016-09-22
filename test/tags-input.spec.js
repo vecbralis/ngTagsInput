@@ -578,6 +578,38 @@ describe('tags-input directive', function() {
         });
     });
 
+    describe('add-on-tab option', function() {
+        it('adds a new tag when the tabkey is pressed and the option is true', function() {
+            // Arrange
+            compile('add-on-space="true"');
+
+            // Act
+            newTag('foo', KEYS.tab);
+
+            // Assert
+            expect($scope.tags).toEqual([{ text: 'foo' }]);
+        });
+
+        it('does not add a new tag when the space key is pressed and the option is false', function() {
+            // Arrange
+            compile('add-on-space="false"');
+
+            // Act
+            newTag('foo', KEYS.tab);
+
+            // Assert
+            expect($scope.tags).toBeUndefined();
+        });
+
+        it('initializes the option to false', function() {
+            // Arrange/Act
+            compile();
+
+            // Assert
+            expect(isolateScope.options.addOnSpace).toBe(false);
+        });
+    });
+
     describe('add-on-blur option', function() {
         it('initializes the option to true', function() {
             // Arrange/Act

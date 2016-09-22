@@ -1279,8 +1279,10 @@ describe('autoComplete directive', function() {
                     expect(event.isPropagationStopped()).toBe(false);
                 });
 
-                it('prevents the tab keydown event from being propagated if there is a suggestion selected', function() {
+
+                it('prevents the tab keydown event from being propagated if there is a suggestion selected and but add-on-tab is not true', function() {
                     // Arrange
+                    compile('add-on-tab="true"');
                     suggestionList.selected = 'suggestion';
 
                     // Act
@@ -1289,6 +1291,18 @@ describe('autoComplete directive', function() {
                     // Assert
                     expect(event.isDefaultPrevented()).toBe(true);
                     expect(event.isPropagationStopped()).toBe(true);
+                });
+
+                it('does not prevent the tab keydown event from being propagated if there is suggestion selected but add-on-tab is not true', function() {
+                    // Arrange
+                    suggestionList.selected = 'suggestion';
+
+                    // Act
+                    var event = sendKeyDown(KEYS.tab);
+
+                    // Assert
+                    expect(event.isDefaultPrevented()).toBe(false);
+                    expect(event.isPropagationStopped()).toBe(false);
                 });
 
                 it('does not prevent the tab keydown event from being propagated if there is no suggestion selected', function() {

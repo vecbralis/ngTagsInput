@@ -29,6 +29,7 @@
  * @param {boolean=} [addOnEnter=true] Flag indicating that a new tag will be added on pressing the ENTER key.
  * @param {boolean=} [addOnSpace=false] Flag indicating that a new tag will be added on pressing the SPACE key.
  * @param {boolean=} [addOnComma=true] Flag indicating that a new tag will be added on pressing the COMMA key.
+ * @param {boolean=} [addOnTab=false] Flag indicating that a new tag will be added on pressing the TAB key.
  * @param {boolean=} [addOnBlur=true] Flag indicating that a new tag will be added when the input field loses focus.
  * @param {boolean=} [addOnPaste=false] Flag indicating that the text pasted into the input field will be split into tags.
  * @param {string=} [pasteSplitPattern=,] Regular expression used to split the pasted text into tags.
@@ -192,6 +193,7 @@ tagsInput.directive('tagsInput', function($timeout, $document, $window, $q, tags
                 addOnEnter: [Boolean, true],
                 addOnSpace: [Boolean, false],
                 addOnComma: [Boolean, true],
+                addOnTab: [Boolean, false],
                 addOnBlur: [Boolean, true],
                 addOnPaste: [Boolean, false],
                 pasteSplitPattern: [RegExp, /,/],
@@ -420,6 +422,7 @@ tagsInput.directive('tagsInput', function($timeout, $document, $window, $q, tags
                     addKeys[KEYS.enter] = options.addOnEnter;
                     addKeys[KEYS.comma] = options.addOnComma;
                     addKeys[KEYS.space] = options.addOnSpace;
+                    addKeys[KEYS.tab] = options.addOnTab;
 
                     shouldAdd = !options.addFromAutocompleteOnly && addKeys[key];
                     shouldRemove = (key === KEYS.backspace || key === KEYS.delete) && tagList.selected;
