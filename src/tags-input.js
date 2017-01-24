@@ -190,6 +190,7 @@ tagsInput.directive('tagsInput', function($timeout, $document, $window, $q, tags
                 minLength: [Number, 3],
                 maxLength: [Number, MAX_SAFE_INTEGER],
                 addOnEnter: [Boolean, true],
+                addOnTab: [Boolean, false],
                 addOnSpace: [Boolean, false],
                 addOnComma: [Boolean, true],
                 addOnBlur: [Boolean, true],
@@ -420,6 +421,7 @@ tagsInput.directive('tagsInput', function($timeout, $document, $window, $q, tags
                     addKeys[KEYS.enter] = options.addOnEnter;
                     addKeys[KEYS.comma] = options.addOnComma;
                     addKeys[KEYS.space] = options.addOnSpace;
+                    addKeys[KEYS.tab] = options.addOnTab;
 
                     shouldAdd = !options.addFromAutocompleteOnly && addKeys[key];
                     shouldRemove = (key === KEYS.backspace || key === KEYS.delete) && tagList.selected;
